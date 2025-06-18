@@ -5,7 +5,7 @@ import CustomFooter from '@/sections/CustomFooter.vue'
 
 <template>
   <CustomHeader />
-  <main class="flex flex-col gap-y-28 pb-28">
+  <main class="flex flex-col gap-y-28 pb-28 pt-[100px]">
     <slot />
   </main>
   <CustomFooter />

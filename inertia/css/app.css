@@ -169,6 +169,13 @@
   }
 }
 
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .my-text-d1,
 .my-text-d2,
 .my-text-d3,

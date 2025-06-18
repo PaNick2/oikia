@@ -52,7 +52,7 @@ const components: { title: string; href: string; description: string }[] = [
   <header
     class="flex justify-between items-center gap-2 fixed top-4 left-0 right-0 mx-auto container h-[--menu-height] bg-white px-8 py-2.5 shadow-md rounded-full z-10"
   >
-    <h2 class="text-h3">Oikia</h2>
+    <Link href="/"" class="text-h3">Oikia</Link>
     <div class="menu">
       <NavigationMenu>
         <NavigationMenuList>
