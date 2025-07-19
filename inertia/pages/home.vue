@@ -10,8 +10,7 @@ import { InferPageProps } from '@adonisjs/inertia/types'
 import { Head } from '@inertiajs/vue3'
 
 defineProps<{
-  // 👇 You will have to manually define each prop
-  allProducts: InferPageProps<HomeController, 'index'>['allProducts'],
+  popularProducts: InferPageProps<HomeController, 'index'>['popularProducts'],
 }>()
 
 </script>
@@ -20,8 +19,9 @@ defineProps<{
   <Head title="Homepage" />
   <Hero />
   <CategoryCircles />
-  <PopularProducts :allProducts="allProducts"/>
+  <PopularProducts :popularProducts="popularProducts"/>
   <Features />
   <FeaturedProductSplit />
   <BlogPosts />
 </template>
+

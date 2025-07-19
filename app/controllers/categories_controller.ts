@@ -4,7 +4,10 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class CategoriesController {
   async show({ inertia, params }: HttpContext) {
-    const currentCategory = await Category.query().where('id', params.id).preload('products')
+    const currentCategory = await Category.query()
+      .where('id', params.id)
+      .preload('products')
+      .first()
 
     if (!currentCategory) {
       throw new Exception('Could not find that category', {
@@ -14,7 +17,8 @@ export default class CategoriesController {
     }
 
     return inertia.render('category/show', {
-      currentCategory: currentCategory[0],
+      currentCategory: currentCategory,
+      products: currentCategory.products,
     })
   }
 }
