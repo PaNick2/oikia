@@ -1,13 +1,41 @@
-import Product from '#models/product'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class HomeController {
-  async index({ inertia }: HttpContext) {
-    const popularProducts = await Product.query().limit(4)
+import Category from '#models/category'
+import Post from '#models/post'
+import Product from '#models/product'
+import db from '@adonisjs/lucid/services/db'
 
-    inertia.share({
-      test: true,
+export default class HomeController {
+  async index({ auth, inertia }: HttpContext) {
+    // Featured categories
+    const featuredCategories = await Category.featured()
+    // Featured products
+    const featuredProducts = await Product.query().limit(10)
+    // Product on sale
+    const productOnSale = await Product.query()
+      .whereNotNull('compare_at_price')
+      .select('*')
+      .select(db.raw('compare_at_price - price as discount'))
+      .orderBy('discount', 'desc')
+      .first()
+    // Featured posts
+    const featuredPosts = await Post.query()
+      .withScopes((scope) => scope.featured())
+      .preload('tags')
+      .preload('user')
+      .limit(3)
+
+    /**
+     * Then access the user object
+     */
+    const user = await auth.user
+    console.log('🚀 ~ HomeController ~ index ~ user:', user)
+    return inertia.render('home', {
+      user,
+      featuredCategories,
+      featuredProducts,
+      productOnSale,
+      featuredPosts,
     })
-    return inertia.render('home', { pageP: true, popularProducts }, { viewP: true })
   }
 }

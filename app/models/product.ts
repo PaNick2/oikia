@@ -1,7 +1,10 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import Category from './category.js'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import CartItem from './cart_item.js'
+import WishlistItem from './wishlist_item.js'
+import app from '@adonisjs/core/services/app'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -14,13 +17,19 @@ export default class Product extends BaseModel {
   declare name: string
 
   @column()
-  declare description: string | null
+  declare description: string
+
+  @column()
+  declare shortDescription: string
 
   @column()
   declare price: number
 
   @column()
-  declare imageUrl: string | null
+  declare compareAtPrice: number
+
+  @column()
+  declare imageUrl: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -30,4 +39,10 @@ export default class Product extends BaseModel {
 
   @belongsTo(() => Category)
   declare category: BelongsTo<typeof Category>
+
+  @hasMany(() => CartItem)
+  declare cartItems: HasMany<typeof CartItem>
+
+  @hasMany(() => WishlistItem)
+  declare wishlistItems: HasMany<typeof WishlistItem>
 }

@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import CustomHeader from '@/sections/CustomHeader.vue'
-import CustomFooter from '@/sections/CustomFooter.vue'
+import CustomFooter from '@/components/layout/CustomFooter.vue';
+import CustomHeader from '@/components/layout/CustomHeader.vue';
+
+
 </script>
 
 <template>
@@ -10,3 +12,4 @@ import CustomFooter from '@/sections/CustomFooter.vue'
   </main>
   <CustomFooter />
 </template>
+υ

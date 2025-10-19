@@ -1,27 +1,32 @@
 <script setup lang="ts">
 import HomeController from '#controllers/home_controller'
-import BlogPosts from '@/sections/homepage/BlogPosts.vue'
-import CategoryCircles from '@/sections/homepage/CategoryCircles.vue'
-import FeaturedProductSplit from '@/sections/homepage/FeaturedProductSplit.vue'
-import Features from '@/sections/homepage/Features.vue'
-import Hero from '@/sections/homepage/Hero.vue'
-import PopularProducts from '@/sections/homepage/PopularProducts.vue'
+import BlogPosts from '@/components/sections/homepage/BlogPosts.vue'
+import CategoryCircles from '@/components/sections/homepage/CategoryCircles.vue'
+import FeaturedProductSplit from '@/components/sections/homepage/FeaturedProductSplit.vue'
+import Features from '@/components/sections/homepage/Features.vue'
+import Hero from '@/components/sections/homepage/Hero.vue'
+import PopularProducts from '@/components/sections/homepage/PopularProducts.vue'
+import { Category, Post, Product, User } from '@/lib/types'
 import { InferPageProps } from '@adonisjs/inertia/types'
 import { Head } from '@inertiajs/vue3'
 
 defineProps<{
-  popularProducts: InferPageProps<HomeController, 'index'>['popularProducts'],
+  featuredProducts: Product[],
+  featuredCategories: Category[],
+  productOnSale: Product | null,
+  featuredPosts: Post[],
+  user: User,
 }>()
 
 </script>
 
 <template>
   <Head title="Homepage" />
-  <Hero />
-  <CategoryCircles />
-  <PopularProducts :popularProducts="popularProducts"/>
+  <Hero :featuredProducts="featuredProducts" />
+  <CategoryCircles :categories="featuredCategories"/>
+  <PopularProducts :popularProducts="featuredProducts"/>
   <Features />
-  <FeaturedProductSplit />
-  <BlogPosts />
+  <FeaturedProductSplit :product="productOnSale"/>
+  <BlogPosts :posts="featuredPosts"/>
 </template>
 
