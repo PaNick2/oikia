@@ -9,6 +9,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import { User } from '@/lib/types';
+import { Link } from '@inertiajs/vue3';
+
+defineProps<{
+  user: User
+}>()
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -148,7 +154,10 @@ const components: { title: string; href: string; description: string }[] = [
       </NavigationMenu>
     </div>
     <div class="menu-actions">
-      <Button>Sign in</Button>
+      <form v-if="user" method="POST" action="/auth/logout">
+        <Button type="submit">Logout</Button>
+      </form>
+      <Link v-else href="/auth/login">Sign in</Link>
     </div>
   </header>
 </template>

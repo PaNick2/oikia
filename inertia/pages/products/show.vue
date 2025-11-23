@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import ProductsController from '#controllers/products_controller'
 import AddToCartButton from '@/components/atoms/AddToCartButton.vue'
 import FavoriteButton from '@/components/atoms/FavoriteButton.vue'
-import ProductCard from '@/components/organisms/ProductCard.vue'
 import BlogPosts from '@/components/sections/homepage/BlogPosts.vue'
 import PopularProducts from '@/components/sections/homepage/PopularProducts.vue'
 import { Post, Product } from '@/lib/types'
-import { InferPageProps } from '@adonisjs/inertia/types'
 
 const props = defineProps<{
   product: Product
@@ -55,8 +52,8 @@ const props = defineProps<{
         <h4 class="my-text-h4">{{ product.price * 1.0 }}€</h4>
         <p>We provide a <b>3 year warranty</b></p>
         <div class="product-actions flex gap-x-1.5 mt-auto">
-          <AddToCartButton />
-          <FavoriteButton />
+          <AddToCartButton :productId="product.id" />
+          <FavoriteButton :productId="product.id"/>
         </div>
       </div>
     </div>

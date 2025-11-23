@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue'
+import { Product } from '@/lib/types'
 type Props = {
   product: Product
 }
 
 const props = defineProps<Props>()
-
-const { product } = props
-const { name, imageUrl, price, compareAtPrice } = product
+const { name, imageUrl, price, compareAtPrice } = props.product
 </script>
 <template>
   <section class="featured-product-split container grid auto-rows-fr lg:grid-cols-2 mx-auto">
@@ -17,16 +16,14 @@ const { name, imageUrl, price, compareAtPrice } = product
     <div class="product-details bg-gray-800 grid place-items-center aspect-square">
       <div class="product-details-inner flex flex-col text-center items-center max-w-[424px]">
         <span class="text-gray-300 my-text-body-sm uppercase">Best deal</span>
-        <span class="product-title text-white mt-4 my-text-h4"
-          >Scandinavian green chair with wooden legs 60x100 cm</span
-        >
+        <span class="product-title text-white mt-4 my-text-h4">{{ name }}</span>
         <img
           :src="`${imageUrl.replace('.png', '2.png')}`"
           alt="Green chair in room"
           width="162"
           class="mt-12"
         />
-        <span class="product-price text-white mt-12 my-text-h3">$357.00</span>
+        <span class="product-price text-white mt-12 my-text-h3">{{ price }}</span>
         <Button variant="outline" class="bg-transparent mt-8 text-white h-12 w-[124px]"
           >Shop now</Button
         >

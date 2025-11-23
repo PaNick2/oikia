@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProductCard from '@/components/organisms/ProductCard.vue'
-import { Category, Product } from '@/lib/types'
+import { Category } from '@/lib/types'
 
 defineProps<{
   category: Category

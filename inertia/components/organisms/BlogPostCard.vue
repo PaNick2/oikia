@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Post } from '@/lib/types'
 
-// 1. Define a local type for props
 type Props = {
   post: Post
   className?: string

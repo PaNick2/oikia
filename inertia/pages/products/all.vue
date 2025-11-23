@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import ProductsController from '#controllers/products_controller'
 import ProductCard from '@/components/organisms/ProductCard.vue'
 import { PaginationMeta, Product } from '@/lib/types'
-import { InferPageProps } from '@adonisjs/inertia/types'
 
 const props = defineProps<{
   products: {
@@ -10,7 +8,7 @@ const props = defineProps<{
     data: Product[]
   }
 }>()
-console.log('products -->', props.products)
+
 </script>
 <template>
   <section class="page-header container mx-auto mt-[var(--top-offset)]">

@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
 import User from './user.js'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'

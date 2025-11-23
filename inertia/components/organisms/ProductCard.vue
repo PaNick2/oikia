@@ -50,8 +50,8 @@ if (compareAtPrice) {
       </div>
     </Link>
     <div class="product-actions flex gap-x-1.5 mt-auto">
-      <AddToCartButton />
-      <FavoriteButton />
+      <AddToCartButton :productId="id" />
+      <FavoriteButton :productId="id" />
     </div>
   </div>
 </template>

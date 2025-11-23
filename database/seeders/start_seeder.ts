@@ -1,4 +1,4 @@
-import Roles from '#enums/roles'
+import Roles from '../../app/enums/roles.js'
 import Category from '#models/category'
 import Post from '#models/post'
 import PostStatus from '#models/post_status'
@@ -224,11 +224,6 @@ export default class extends BaseSeeder {
     ])
 
     //? 7. Create posts
-    const postFiles = [
-      app.makeURL('resources/blog/posts/post_1.md'),
-      app.makeURL('resources/blog/posts/post_2.md'),
-      app.makeURL('resources/blog/posts/post_3.md'),
-    ]
 
     const posts = [
       {

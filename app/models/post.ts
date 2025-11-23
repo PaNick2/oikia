@@ -1,13 +1,5 @@
 import { DateTime } from 'luxon'
-import {
-  BaseModel,
-  beforeSave,
-  belongsTo,
-  column,
-  computed,
-  manyToMany,
-  scope,
-} from '@adonisjs/lucid/orm'
+import { BaseModel, beforeSave, belongsTo, column, manyToMany, scope } from '@adonisjs/lucid/orm'
 import User from './user.js'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import PostStatus from './post_status.js'

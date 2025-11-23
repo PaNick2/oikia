@@ -4,7 +4,7 @@ export type User = {
   fullName: string
   email: string
   password: string
-}
+} | null
 
 export type Product = {
   id: number

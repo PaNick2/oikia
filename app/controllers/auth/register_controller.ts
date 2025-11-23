@@ -3,12 +3,17 @@ import { registerValidator } from '#validators/auth'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class RegisterController {
-  async store({ request, auth }: HttpContext) {
+  async index({ request, inertia }: HttpContext) {
+    return inertia.render('auth/register', { csrfToken: request.csrfToken })
+  }
+
+  async store({ request, auth, response }: HttpContext) {
     const data = await request.validateUsing(registerValidator)
+
     const user = await User.create(data)
 
     await auth.use('web').login(user)
 
-    return user
+    return response.redirect().toPath('/')
   }
 }

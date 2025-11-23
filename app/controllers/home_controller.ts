@@ -6,7 +6,7 @@ import Product from '#models/product'
 import db from '@adonisjs/lucid/services/db'
 
 export default class HomeController {
-  async index({ auth, inertia }: HttpContext) {
+  async index({ inertia }: HttpContext) {
     // Featured categories
     const featuredCategories = await Category.featured()
     // Featured products
@@ -25,13 +25,7 @@ export default class HomeController {
       .preload('user')
       .limit(3)
 
-    /**
-     * Then access the user object
-     */
-    const user = await auth.user
-    console.log('🚀 ~ HomeController ~ index ~ user:', user)
     return inertia.render('home', {
-      user,
       featuredCategories,
       featuredProducts,
       productOnSale,

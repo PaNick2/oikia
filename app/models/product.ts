@@ -4,7 +4,6 @@ import Category from './category.js'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import CartItem from './cart_item.js'
 import WishlistItem from './wishlist_item.js'
-import app from '@adonisjs/core/services/app'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })

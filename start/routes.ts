@@ -1,20 +1,12 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
-const ProductsController = () => import('#controllers/products_controller')
-const CategoriesController = () => import('#controllers/categories_controller')
-const RegisterController = () => import('#controllers/auth/register_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
-const PostsController = () => import('#controllers/posts_controller')
+const RegisterController = () => import('#controllers/auth/register_controller')
+const CategoriesController = () => import('#controllers/categories_controller')
 const HomeController = () => import('#controllers/home_controller')
+const PostsController = () => import('#controllers/posts_controller')
+const ProductsController = () => import('#controllers/products_controller')
 const WishlistsController = () => import('#controllers/wishlists_controller')
+const CartsController = () => import('#controllers/carts_controller')
 import router from '@adonisjs/core/services/router'
 
 router.get('/', [HomeController, 'index']).as('home.index')
@@ -36,13 +28,16 @@ router.get('/products/:id', [ProductsController, 'show']).as('products.show')
 
 router
   .group(() => {
+    router.get('/register', [RegisterController, 'index']).as('register.index')
     router.post('/register', [RegisterController, 'store']).as('register.store')
 
     router.post('/logout', [LogoutController, 'handle']).as('logout.handle')
 
+    router.get('/login', [LoginController, 'index']).as('login.index')
     router.post('/login', [LoginController, 'store']).as('login.store')
   })
   .as('auth')
+  .prefix('auth')
 
 router
   .group(() => {
@@ -55,17 +50,16 @@ router
   .as('blog')
   .prefix('blog')
 
-router.get('wishlist', [WishlistsController, 'show']).as('wishlist.show')
-router.get('wishlist/:product_id', [WishlistsController, 'update']).as('wishlist.update')
+router
+  .group(() => {
+    router.get('wishlist', [WishlistsController, 'index']).as('wishlist.show')
+    router.post('wishlist', [WishlistsController, 'update']).as('wishlist.update')
+  })
+  .as('wishlist')
 
-router.get('/dashboard', async ({ auth }) => {
-  /**
-   * First, authenticate the user
-   */
-  await auth.check()
-
-  /**
-   * Then access the user object
-   */
-  return await auth?.user
-})
+router
+  .group(() => {
+    router.get('/cart', [CartsController, 'index']).as('cart.show')
+    router.post('/cart', [CartsController, 'update']).as('cart.update')
+  })
+  .as('cart')
